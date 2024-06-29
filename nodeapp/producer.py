@@ -1,22 +1,16 @@
 import time
-import random 
-import threading 
-# from sqs import send_message_to_email_queue 
-from sns import publish_message
-
-
+import random
+import threading
+from sns import publish_message  # Assuming publish_message function is defined in sns module
 
 def produce_email():
     while True:
-        message = f"this is a message from the produer :{random.randint(1,100)}"
+        message = f"This is a message from the producer: {random.randint(1, 100)}"
         subject = 'test message'
-        publish_message(message,subject)
+        publish_message(message, subject)  # Use the publish_message function from sns module
         time.sleep(5)
 
-
 if __name__ == "__main__":
-    producer =threading.Thread(target=produce_email)
+    producer = threading.Thread(target=produce_email)
     producer.start()
     producer.join()
-
-
